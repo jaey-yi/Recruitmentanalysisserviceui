@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router';
-import { Eye, Plus, X } from 'lucide-react';
+import { Eye, Plus, X, Settings } from 'lucide-react';
 import { mockExperiences, mockStrategies } from '../data/mockData';
 
 function ExperienceModal({ isOpen, onClose, experience }: any) {
@@ -9,7 +9,10 @@ function ExperienceModal({ isOpen, onClose, experience }: any) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
       <div className="bg-white rounded-2xl p-8 w-full max-w-2xl relative">
-        <button onClick={onClose} className="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
+        >
           <X size={24} />
         </button>
 
@@ -21,7 +24,9 @@ function ExperienceModal({ isOpen, onClose, experience }: any) {
             <p className="text-sm text-gray-500">{experience?.period}</p>
           </div>
           <div>
-            <p className="text-gray-700 whitespace-pre-wrap">{experience?.content}</p>
+            <p className="text-gray-700 whitespace-pre-wrap">
+              {experience?.content}
+            </p>
           </div>
         </div>
       </div>
@@ -47,14 +52,22 @@ export function StrategyInputPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 pt-20 pb-16">
-      <div className="max-w-[1400px] mx-auto px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+    <div className="min-h-screen bg-gray-50 pt-20 pb-16 ">
+      <div className="max-w-[1400px] mx-auto px-8 ">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 ">
           {/* Left Sidebar - Strategy History */}
-          <div className="lg:col-span-1">
+          <div className="lg:col-span-1 ">
             <div className="bg-white rounded-xl p-6 border border-gray-200 sticky top-24">
-              <h3 className="mb-4 pb-4 border-b border-gray-200">전략 히스토리</h3>
+              <h3 className="mb-4 pb-4 border-b border-gray-200">
+                전략 히스토리
+              </h3>
               <div className="space-y-2">
+                <button
+                  className="w-full p-4 border rounded-lg"
+                  onClick={() => navigate(`/strategy-input`)}
+                >
+                  새 전략 생성
+                </button>
                 {mockStrategies.map((strategy) => (
                   <button
                     key={strategy.id}
@@ -62,9 +75,18 @@ export function StrategyInputPage() {
                     className="w-full text-left px-4 py-3 rounded-lg hover:bg-gray-100 transition-colors"
                   >
                     <p className="text-sm mb-1">{strategy.jobType}</p>
-                    <p className="text-xs text-gray-500">{strategy.createdAt}</p>
+                    <p className="text-xs text-gray-500">
+                      {strategy.createdAt}
+                    </p>
                   </button>
                 ))}
+                <button
+                  onClick={() => navigate('/mypage/strategies')}
+                  className="w-full px-4 py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors flex items-center justify-center gap-2 border-t border-gray-200 pt-4 mt-4"
+                >
+                  <Settings size={18} />
+                  관리하기
+                </button>
               </div>
             </div>
           </div>
@@ -95,16 +117,25 @@ export function StrategyInputPage() {
                             checked={selectedExperiences.includes(exp.id)}
                             onChange={(e) => {
                               if (e.target.checked) {
-                                setSelectedExperiences([...selectedExperiences, exp.id]);
+                                setSelectedExperiences([
+                                  ...selectedExperiences,
+                                  exp.id,
+                                ]);
                               } else {
-                                setSelectedExperiences(selectedExperiences.filter((id) => id !== exp.id));
+                                setSelectedExperiences(
+                                  selectedExperiences.filter(
+                                    (id) => id !== exp.id,
+                                  ),
+                                );
                               }
                             }}
                             className="mt-1"
                           />
                           <div className="flex-1">
                             <h4 className="text-sm mb-1">{exp.title}</h4>
-                            <p className="text-xs text-gray-500 mb-2">{exp.period}</p>
+                            <p className="text-xs text-gray-500 mb-2">
+                              {exp.period}
+                            </p>
                             <button
                               onClick={() => {
                                 setSelectedExperience(exp);
@@ -126,7 +157,9 @@ export function StrategyInputPage() {
               {/* Right Content - Settings */}
               <div className="lg:col-span-3">
                 <div className="bg-white rounded-xl p-6 border border-gray-200">
-                  <h3 className="mb-6 pb-4 border-b border-gray-200">포폴 전략 설정</h3>
+                  <h3 className="mb-6 pb-4 border-b border-gray-200">
+                    포폴 전략 설정
+                  </h3>
 
                   <div className="space-y-6">
                     {/* Job Type */}

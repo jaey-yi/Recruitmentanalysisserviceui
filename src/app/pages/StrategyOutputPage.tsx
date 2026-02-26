@@ -22,14 +22,24 @@ export function StrategyOutputPage() {
           {/* Left Sidebar - Strategy History */}
           <div className="lg:col-span-1">
             <div className="bg-white rounded-xl p-6 border border-gray-200 sticky top-24">
-              <h3 className="mb-4 pb-4 border-b border-gray-200">전략 히스토리</h3>
+              <h3 className="mb-4 pb-4 border-b border-gray-200">
+                전략 히스토리
+              </h3>
               <div className="space-y-2 mb-6">
+                <button
+                  className="w-full p-4 border rounded-lg"
+                  onClick={() => navigate(`/strategy-input`)}
+                >
+                  새 전략 생성
+                </button>
                 {mockStrategies.map((s) => (
                   <button
                     key={s.id}
                     onClick={() => navigate(`/strategy-output/${s.id}`)}
                     className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${
-                      s.id === id ? 'bg-primary text-white' : 'hover:bg-gray-100'
+                      s.id === id
+                        ? 'bg-primary text-white'
+                        : 'hover:bg-gray-100'
                     }`}
                   >
                     <p className="text-sm mb-1">{s.jobType}</p>
@@ -57,17 +67,12 @@ export function StrategyOutputPage() {
                     <span className="px-3 py-1 bg-blue-50 text-primary rounded-full text-sm">
                       {strategy.industry}
                     </span>
-                    <span className="text-sm text-gray-500">{strategy.createdAt} 생성</span>
+                    <span className="text-sm text-gray-500">
+                      {strategy.createdAt} 생성
+                    </span>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
-                  <button 
-                    onClick={() => navigate('/strategy-input')}
-                    className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2"
-                  >
-                    <Plus size={18} />
-                    새전략 등록하기
-                  </button>
                   <button className="px-4 py-2 border border-red-300 text-red-600 rounded-lg hover:bg-red-50 transition-colors flex items-center gap-2">
                     <Trash2 size={18} />
                     삭제
@@ -77,7 +82,9 @@ export function StrategyOutputPage() {
 
               {/* Strategy Content */}
               <div className="prose prose-sm max-w-none">
-                <div className="whitespace-pre-wrap text-gray-700">{strategy.content}</div>
+                <div className="whitespace-pre-wrap text-gray-700">
+                  {strategy.content}
+                </div>
               </div>
 
               {/* Structured Sections */}

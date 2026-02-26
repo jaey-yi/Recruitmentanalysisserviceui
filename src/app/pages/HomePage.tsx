@@ -10,7 +10,12 @@ interface JobRequestModalProps {
   onLoginRequired: () => void;
 }
 
-function JobRequestModal({ isOpen, onClose, isLoggedIn, onLoginRequired }: JobRequestModalProps) {
+function JobRequestModal({
+  isOpen,
+  onClose,
+  isLoggedIn,
+  onLoginRequired,
+}: JobRequestModalProps) {
   const [link, setLink] = useState('');
   const [platform, setPlatform] = useState('');
 
@@ -31,7 +36,10 @@ function JobRequestModal({ isOpen, onClose, isLoggedIn, onLoginRequired }: JobRe
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
       <div className="bg-white rounded-2xl p-8 w-full max-w-md relative">
-        <button onClick={onClose} className="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
+        >
           <X size={24} />
         </button>
 
@@ -81,7 +89,9 @@ export function HomePage() {
   const itemsPerPage = 9;
 
   const filteredJobs = mockJobs.filter((job) => {
-    const matchesSearch = job.title.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSearch = job.title
+      .toLowerCase()
+      .includes(searchQuery.toLowerCase());
     const matchesFilter = !selectedFilter || job.jobType === selectedFilter;
     return matchesSearch && matchesFilter;
   });
@@ -96,7 +106,7 @@ export function HomePage() {
   const totalPages = Math.ceil(sortedJobs.length / itemsPerPage);
   const displayedJobs = sortedJobs.slice(
     (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
+    currentPage * itemsPerPage,
   );
 
   return (
@@ -105,9 +115,14 @@ export function HomePage() {
         {/* Search Section */}
         <div className="max-w-[1400px] mx-auto px-8 py-16">
           <div className="max-w-3xl mx-auto">
-            <h1 className="text-center mb-8">나에게 맞는 채용 공고를 찾아보세요</h1>
+            <h1 className="text-center mb-8">
+              나에게 맞는 채용 공고를 찾아보세요
+            </h1>
             <div className="relative">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+              <Search
+                className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
+                size={20}
+              />
               <input
                 type="text"
                 value={searchQuery}
@@ -153,6 +168,36 @@ export function HomePage() {
             >
               백엔드
             </button>
+            <button
+              onClick={() => setSelectedFilter('ai')}
+              className={`px-6 py-2 rounded-full transition-colors ${
+                selectedFilter === 'ai'
+                  ? 'bg-primary text-white'
+                  : 'bg-white text-gray-700 border border-gray-300 hover:border-primary'
+              }`}
+            >
+              AI
+            </button>
+            <button
+              onClick={() => setSelectedFilter('data')}
+              className={`px-6 py-2 rounded-full transition-colors ${
+                selectedFilter === 'data'
+                  ? 'bg-primary text-white'
+                  : 'bg-white text-gray-700 border border-gray-300 hover:border-primary'
+              }`}
+            >
+              데이터 분석
+            </button>
+            <button
+              onClick={() => setSelectedFilter('game')}
+              className={`px-6 py-2 rounded-full transition-colors ${
+                selectedFilter === 'game'
+                  ? 'bg-primary text-white'
+                  : 'bg-white text-gray-700 border border-gray-300 hover:border-primary'
+              }`}
+            >
+              게임
+            </button>
           </div>
         </div>
 
@@ -162,7 +207,9 @@ export function HomePage() {
             <p className="text-gray-600">총 {filteredJobs.length}개의 공고</p>
             <select
               value={sortBy}
-              onChange={(e) => setSortBy(e.target.value as 'latest' | 'deadline')}
+              onChange={(e) =>
+                setSortBy(e.target.value as 'latest' | 'deadline')
+              }
               className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
             >
               <option value="latest">최신 등록 순</option>
@@ -181,12 +228,18 @@ export function HomePage() {
                 className="bg-white rounded-xl p-6 border border-gray-200 hover:shadow-lg hover:border-primary transition-all"
               >
                 <div className="mb-3">
-                  <p className="text-sm text-gray-500 mb-1">{job.companyName}</p>
+                  <p className="text-sm text-gray-500 mb-1">
+                    {job.companyName}
+                  </p>
                   <h3 className="mb-2">{job.title}</h3>
-                  <p className="text-sm text-gray-600 line-clamp-2">{job.summary}</p>
+                  <p className="text-sm text-gray-600 line-clamp-2">
+                    {job.summary}
+                  </p>
                 </div>
                 <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-100">
-                  <span className="text-sm text-gray-500">{job.deadline} 마감</span>
+                  <span className="text-sm text-gray-500">
+                    {job.deadline} 마감
+                  </span>
                   <span className="text-sm px-3 py-1 bg-blue-50 text-primary rounded-full">
                     {job.experience}
                   </span>
@@ -198,19 +251,21 @@ export function HomePage() {
           {/* Pagination */}
           {totalPages > 1 && (
             <div className="flex items-center justify-center gap-2 mt-12">
-              {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                <button
-                  key={page}
-                  onClick={() => setCurrentPage(page)}
-                  className={`w-10 h-10 rounded-lg transition-colors ${
-                    currentPage === page
-                      ? 'bg-primary text-white'
-                      : 'bg-white text-gray-700 border border-gray-300 hover:border-primary'
-                  }`}
-                >
-                  {page}
-                </button>
-              ))}
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+                (page) => (
+                  <button
+                    key={page}
+                    onClick={() => setCurrentPage(page)}
+                    className={`w-10 h-10 rounded-lg transition-colors ${
+                      currentPage === page
+                        ? 'bg-primary text-white'
+                        : 'bg-white text-gray-700 border border-gray-300 hover:border-primary'
+                    }`}
+                  >
+                    {page}
+                  </button>
+                ),
+              )}
             </div>
           )}
         </div>

@@ -9,35 +9,41 @@ export function InterviewCreatePage() {
     <div className="min-h-screen bg-gray-50 pt-20 pb-16">
       <div className="max-w-[1400px] mx-auto px-8">
         {/* Navigation */}
-        <div className="mb-6">
-          <div className="flex items-center gap-2 text-sm text-gray-600">
-            <button 
-              onClick={() => navigate('/interview-create')}
-              className="hover:text-primary transition-colors"
-            >
-              면접 생성
-            </button>
-            <span>/</span>
-            <span className="text-primary">면접 진행</span>
-          </div>
-        </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           {/* Left Sidebar - Interview History */}
           <div className="lg:col-span-1">
             <div className="bg-white rounded-xl p-6 border border-gray-200 sticky top-24">
-              <h3 className="mb-4 pb-4 border-b border-gray-200">면접 히스토리</h3>
+              <h3 className="mb-4 pb-4 border-b border-gray-200">
+                면접 히스토리
+              </h3>
               <div className="space-y-2">
+                <button
+                  className="w-full p-4 border rounded-lg"
+                  onClick={() => navigate(`/interview-create`)}
+                >
+                  새 모의 면접 생성
+                </button>
                 {mockInterviews.map((interview) => (
                   <button
                     key={interview.id}
-                    onClick={() => navigate(`/interview-result/${interview.id}`)}
+                    onClick={() =>
+                      navigate(`/interview-result/${interview.id}`)
+                    }
                     className="w-full text-left px-4 py-3 rounded-lg hover:bg-gray-100 transition-colors"
                   >
                     <p className="text-sm mb-1">{interview.portfolioTitle}</p>
-                    <p className="text-xs text-gray-500">{interview.interviewDate}</p>
+                    <p className="text-xs text-gray-500">
+                      {interview.interviewDate}
+                    </p>
                   </button>
                 ))}
+                <button
+                  className="w-full p-4 border rounded-lg"
+                  onClick={() => navigate(`/mypage/interviews`)}
+                >
+                  관리 하기
+                </button>
               </div>
             </div>
           </div>
@@ -45,7 +51,9 @@ export function InterviewCreatePage() {
           {/* Main Content */}
           <div className="lg:col-span-3">
             <div className="bg-white rounded-xl p-8 border border-gray-200">
-              <h2 className="mb-6 pb-4 border-b border-gray-200">AI 모의 면접</h2>
+              <h2 className="mb-6 pb-4 border-b border-gray-200">
+                AI 모의 면접
+              </h2>
 
               {/* Instructions */}
               <div className="bg-blue-50 rounded-lg p-6 mb-8">
@@ -68,7 +76,7 @@ export function InterviewCreatePage() {
                 <div className="flex items-center justify-between mb-4">
                   <h3>포트폴리오 선택</h3>
                   <button
-                    onClick={() => navigate('/strategy-input')}
+                    onClick={() => navigate('/mypage/files')}
                     className="px-4 py-2 border border-primary text-primary rounded-lg hover:bg-blue-50 transition-colors flex items-center gap-2 text-sm"
                   >
                     <FileText size={16} />
@@ -81,15 +89,23 @@ export function InterviewCreatePage() {
                       key={strategy.id}
                       className="flex items-center gap-3 border border-gray-200 rounded-lg p-4 cursor-pointer hover:border-primary transition-colors"
                     >
-                      <input type="radio" name="portfolio" className="w-4 h-4" />
+                      <input
+                        type="radio"
+                        name="portfolio"
+                        className="w-4 h-4"
+                      />
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-1">
-                          <h4 className="text-sm">{strategy.jobType} 포트폴리오</h4>
+                          <h4 className="text-sm">
+                            {strategy.jobType} 포트폴리오
+                          </h4>
                           <span className="px-2 py-1 bg-blue-50 text-primary rounded text-xs">
                             {strategy.industry}
                           </span>
                         </div>
-                        <p className="text-xs text-gray-500">{strategy.createdAt} 생성</p>
+                        <p className="text-xs text-gray-500">
+                          {strategy.createdAt} 생성
+                        </p>
                       </div>
                     </label>
                   ))}

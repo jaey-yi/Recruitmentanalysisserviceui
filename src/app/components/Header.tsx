@@ -1,5 +1,12 @@
 import { Link } from 'react-router';
-import { User, LogOut, Bookmark, FileText, Briefcase, ClipboardList } from 'lucide-react';
+import {
+  User,
+  LogOut,
+  Bookmark,
+  FileText,
+  Briefcase,
+  ClipboardList,
+} from 'lucide-react';
 import { useState } from 'react';
 
 interface HeaderProps {
@@ -20,11 +27,23 @@ export function Header({ isLoggedIn, onLoginClick, onLogout }: HeaderProps) {
             📄 공고문
           </Link>
           <nav className="flex items-center gap-8">
-            <Link to="/" className="text-gray-700 hover:text-primary transition-colors">
+            <Link
+              to="/"
+              className="text-gray-700 hover:text-primary transition-colors"
+            >
               채용 공고
             </Link>
-            <Link to="/strategy-input" className="text-gray-700 hover:text-primary transition-colors">
+            <Link
+              to="/strategy-input"
+              className="text-gray-700 hover:text-primary transition-colors"
+            >
               포폴 전략
+            </Link>
+            <Link
+              to="/interview-create"
+              className="text-gray-700 hover:text-primary transition-colors"
+            >
+              모의 면접
             </Link>
           </nav>
         </div>
